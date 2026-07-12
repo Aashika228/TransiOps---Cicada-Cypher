@@ -45,17 +45,17 @@ function DashboardPreview({ previewType, color }: { previewType: string; color: 
       <div className="grid grid-cols-2 gap-2">
         {data.labels.map((label, i) => (
           <div key={label} className="rounded-lg p-3" style={{ background: `${color}08`, border: `1px solid ${color}20` }}>
-            <div className="text-xs text-slate-500 mb-1">{label}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-1">{label}</div>
             <div className="text-lg font-bold" style={{ color: data.colors[i] || color }}>{data.values[i]}</div>
           </div>
         ))}
       </div>
       <div className="rounded-lg p-3" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
-        <div className="text-xs font-semibold text-slate-600 mb-2">Latest Activity</div>
+        <div className="text-xs font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500 mb-2">Latest Activity</div>
         <div className="space-y-1.5">
           {activity.map((item) => (
             <div key={item.label} className="flex justify-between items-center text-xs">
-              <span className="text-slate-500 truncate max-w-[60%]">{item.label}</span>
+              <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500 truncate max-w-[60%]">{item.label}</span>
               <span className="font-semibold" style={{ color: item.ok ? color : '#f59e0b' }}>{item.value}</span>
             </div>
           ))}
@@ -80,14 +80,14 @@ export function Features() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-2" style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)' }}>
             <span className="text-xs font-semibold text-emerald-600 uppercase tracking-widest">Platform Features</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-50 leading-tight">
             Powerful Tools for
             <br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Modern Fleet Operations
             </span>
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 dark:text-slate-400 dark:text-slate-500 max-w-2xl mx-auto">
             Explore each module to see how Vahan Saarthi transforms fleet management.
           </p>
         </div>
@@ -122,8 +122,8 @@ export function Features() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4" style={{ background: `${activeFeature.color}12`, border: `1px solid ${activeFeature.color}30`, color: activeFeature.color }}>
                 Feature Module
               </div>
-              <h3 className="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-4">{activeFeature.title}</h3>
-              <p className="text-slate-500 leading-relaxed text-lg">{activeFeature.description}</p>
+              <h3 className="font-display text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4">{activeFeature.title}</h3>
+              <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed text-lg">{activeFeature.description}</p>
             </div>
             <div className="space-y-3">
               {activeFeature.bullets.map((bullet, i) => (
@@ -131,7 +131,7 @@ export function Features() {
                   <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${activeFeature.color}15` }}>
                     <CheckCircle2 className="h-3.5 w-3.5" style={{ color: activeFeature.color }} />
                   </div>
-                  <span className="text-slate-700 font-medium text-sm">{bullet}</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{bullet}</span>
                 </div>
               ))}
             </div>
@@ -139,7 +139,7 @@ export function Features() {
               <button className="group flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-sm transition-all duration-300 hover:scale-105" style={{ background: `linear-gradient(135deg, ${activeFeature.color}, ${activeFeature.color}cc)`, boxShadow: `0 4px 20px ${activeFeature.color}35` }}>
                 Learn More <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-slate-600 transition-all duration-300 hover:scale-105" style={{ background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+              <button className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-400 dark:text-slate-500 transition-all duration-300 hover:scale-105" style={{ background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
                 Watch Demo
               </button>
             </div>
@@ -157,7 +157,7 @@ export function Features() {
                 <div className="w-3 h-3 rounded-full bg-red-400" />
                 <div className="w-3 h-3 rounded-full bg-yellow-400" />
                 <div className="w-3 h-3 rounded-full" style={{ background: activeFeature.color }} />
-                <span className="ml-3 text-xs font-medium text-slate-500">{activeFeature.title}</span>
+                <span className="ml-3 text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">{activeFeature.title}</span>
               </div>
               <div className="p-5">
                 <DashboardPreview previewType={activeFeature.preview} color={activeFeature.color} />

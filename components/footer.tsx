@@ -34,7 +34,7 @@ export function CTA() {
             <span className="text-xs font-bold text-emerald-300 uppercase tracking-widest">Get Started Today</span>
           </div>
 
-          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight drop-shadow-2xl">
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight drop-shadow-2xl dark:shadow-none">
             Ready to Modernize Your
             <br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
@@ -95,10 +95,10 @@ export function Footer() {
               </div>
               <div>
                 <p className="font-display font-extrabold text-lg text-white tracking-tight">Vahan Saarthi</p>
-                <p className="text-[9px] text-slate-500 font-semibold uppercase tracking-widest">Fleet Intelligence</p>
+                <p className="text-[9px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest">Fleet Intelligence</p>
               </div>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-400 dark:text-slate-500 leading-relaxed">
               Empowering fleet managers with intelligent tools to run modern, efficient transport operations.
             </p>
             <div className="flex gap-2.5 pt-1">
@@ -128,7 +128,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {col.items.map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">{item}</a>
+                    <a href="#" className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-emerald-400 transition-colors duration-200">{item}</a>
                   </li>
                 ))}
               </ul>
@@ -139,15 +139,15 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-sm tracking-wide">Contact</h4>
             <div className="space-y-3">
-              <a href="mailto:hello@vahansaarthi.com" className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">
+              <a href="mailto:hello@vahansaarthi.com" className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-emerald-400 transition-colors duration-200">
                 <Mail className="h-3.5 w-3.5 flex-shrink-0" />
                 hello@vahansaarthi.com
               </a>
-              <a href="tel:+918000000000" className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">
+              <a href="tel:+918000000000" className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-emerald-400 transition-colors duration-200">
                 <Phone className="h-3.5 w-3.5 flex-shrink-0" />
                 +91 800 000 0000
               </a>
-              <div className="flex items-start gap-2 text-sm text-slate-500">
+              <div className="flex items-start gap-2 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">
                 <MapPin className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
                 New Delhi, India
               </div>
@@ -157,10 +157,10 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <p className="text-xs text-slate-600">© 2024 Vahan Saarthi Technologies Pvt. Ltd. All rights reserved.</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500">© 2024 Vahan Saarthi Technologies Pvt. Ltd. All rights reserved.</p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
-              <a key={item} href="#" className="text-xs text-slate-600 hover:text-emerald-400 transition-colors duration-200">{item}</a>
+              <a key={item} href="#" className="text-xs text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:text-emerald-400 transition-colors duration-200">{item}</a>
             ))}
           </div>
         </div>

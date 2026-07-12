@@ -14,6 +14,7 @@ import { DriverManagement } from '@/components/dashboard/DriverManagement'
 import { TripManagement } from '@/components/dashboard/TripManagement'
 import { MaintenanceLog } from '@/components/dashboard/MaintenanceLog'
 import { ExpenseManagement } from '@/components/dashboard/ExpenseManagement'
+import { ModeToggle } from '@/components/mode-toggle'
 
 function DashboardContent() {
   const searchParams = useSearchParams()
@@ -70,27 +71,27 @@ function DashboardContent() {
   }
 
   return (
-    <div className="flex h-screen bg-slate-50 font-sans">
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-800 font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-200 flex flex-col z-20">
-        <div className="h-16 flex items-center px-6 border-b border-slate-100">
+      <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-20">
+        <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800">
           <Link href="/" className="flex items-center gap-2 cursor-pointer group">
             <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6"
               style={{ background: 'linear-gradient(135deg, #10b981, #059669)', boxShadow: '0 4px 14px rgba(16,185,129,0.35)' }}>
               <span className="text-white font-black text-sm leading-none">V</span>
             </div>
-            <span className="font-display font-extrabold text-lg text-slate-900 tracking-tight">Vahan Saarthi</span>
+            <span className="font-display font-extrabold text-lg text-slate-900 dark:text-slate-50 tracking-tight">Vahan Saarthi</span>
           </Link>
         </div>
         
         <div className="p-4 flex-1">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Menu</p>
+          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 ml-2">Menu</p>
           <nav className="space-y-1">
             {getNavLinks().map((link) => {
               const Icon = link.icon
               return (
-                <Link key={link.name} href={link.href} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${link.active ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'}`}>
-                  <Icon className={`h-4 w-4 ${link.active ? 'text-emerald-600' : 'text-slate-400'}`} />
+                <Link key={link.name} href={link.href} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${link.active ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700' : 'text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:bg-slate-800 hover:text-slate-900 dark:text-slate-50'}`}>
+                  <Icon className={`h-4 w-4 ${link.active ? 'text-emerald-600' : 'text-slate-400 dark:text-slate-500'}`} />
                   {link.name}
                 </Link>
               )
@@ -98,9 +99,9 @@ function DashboardContent() {
           </nav>
         </div>
         
-        <div className="p-4 border-t border-slate-100">
-          <Link href="/auth" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-red-50 hover:text-red-600 transition-colors">
-            <LogOut className="h-4 w-4 text-slate-400 group-hover:text-red-500" />
+        <div className="p-4 border-t border-slate-100 dark:border-slate-800">
+          <Link href="/auth" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:bg-red-50 dark:bg-red-950/30 hover:text-red-600 transition-colors">
+            <LogOut className="h-4 w-4 text-slate-400 dark:text-slate-500 group-hover:text-red-500" />
             Sign Out
           </Link>
         </div>
@@ -109,26 +110,27 @@ function DashboardContent() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Top Header */}
-        <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-8 z-10">
+        <header className="h-16 bg-white dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 z-10">
           <div className="relative w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
             <input 
               type="text" 
               placeholder="Search anything..." 
-              className="w-full pl-9 pr-4 py-2 bg-slate-100 border-transparent rounded-xl text-sm font-medium focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-slate-100 dark:bg-slate-800/80 border-transparent rounded-xl text-sm font-medium focus:bg-white dark:bg-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
             />
           </div>
           
           <div className="flex items-center gap-4">
-            <button className="relative w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition-colors">
-              <Bell className="h-4 w-4 text-slate-600" />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-100" />
+            <ModeToggle />
+            <button className="relative w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:bg-slate-700 transition-colors">
+              <Bell className="h-4 w-4 text-slate-600 dark:text-slate-400 dark:text-slate-500" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-100 dark:border-slate-800" />
             </button>
-            <div className="h-6 w-px bg-slate-200" />
+            <div className="h-6 w-px bg-slate-200 dark:bg-slate-700" />
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold text-slate-900 leading-tight">Demo User</p>
-                <p className="text-[10px] font-semibold text-slate-500 uppercase">{roleDisplay}</p>
+                <p className="text-sm font-bold text-slate-900 dark:text-slate-50 leading-tight">Demo User</p>
+                <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-500 uppercase">{roleDisplay}</p>
               </div>
               <div className="w-9 h-9 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700 font-bold text-sm">
                 DU
@@ -151,7 +153,7 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={<div className="h-screen w-full flex items-center justify-center bg-slate-50"><div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-500 rounded-full animate-spin" /></div>}>
+    <Suspense fallback={<div className="h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-800"><div className="w-8 h-8 border-4 border-emerald-200 border-t-emerald-500 rounded-full animate-spin" /></div>}>
       <DashboardContent />
     </Suspense>
   )

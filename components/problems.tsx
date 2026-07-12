@@ -52,7 +52,7 @@ export function Problems() {
               <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
               <span className="text-xs font-bold text-red-500 uppercase tracking-widest">The Problem</span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 leading-[1.0] tracking-tight">
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 leading-[1.0] tracking-tight">
               The Old Way
               <br />
               <span style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
@@ -61,7 +61,7 @@ export function Problems() {
             </h2>
           </div>
           <div>
-            <p className="text-lg text-slate-500 leading-relaxed">
+            <p className="text-lg text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed">
               Every day your team relies on spreadsheets, WhatsApp messages, and gut instinct — you are leaving efficiency, money, and safety on the table. Here's what's breaking down.
             </p>
           </div>
@@ -96,8 +96,8 @@ export function Problems() {
                   <Icon className="h-7 w-7 text-white" />
                 </div>
 
-                <h3 className="font-display text-xl font-bold text-slate-900 mb-3">{problem.title}</h3>
-                <p className="text-slate-500 leading-relaxed text-sm">{problem.description}</p>
+                <h3 className="font-display text-xl font-bold text-slate-900 dark:text-slate-50 mb-3">{problem.title}</h3>
+                <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed text-sm">{problem.description}</p>
 
                 <div className="flex items-center gap-1.5 mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-bold" style={{ color: problem.iconColor }}>
                   See our solution <ArrowRight className="h-3 w-3" />

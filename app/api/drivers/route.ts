@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
+export const dynamic = 'force-dynamic';
 import Driver from '@/lib/models/Driver';
 
 export async function GET() {

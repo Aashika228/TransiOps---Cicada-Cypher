@@ -7,6 +7,7 @@ const vehicleSchema = new mongoose.Schema({
     maxLoadCapacity: Number,
     odometer: Number,
     acquisitionCost: Number,
+    currentLocation: { type: String, default: 'Warehouse Depot, Mumbai' },
     revenue: { type: Number, default: 0 },
     status: {
         type: String,

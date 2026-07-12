@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
+export const dynamic = 'force-dynamic';
 import Expense from '@/lib/models/Expense';
 
 export async function POST(req: Request) {

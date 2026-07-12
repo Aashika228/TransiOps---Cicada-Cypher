@@ -140,15 +140,15 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[1000] w-full max-w-md px-4 flex flex-col gap-2 pointer-events-none">
         
         {/* Search Bar */}
-        <form onSubmit={handleSearch} className="relative shadow-lg rounded-xl overflow-hidden pointer-events-auto flex">
+        <form onSubmit={handleSearch} className="relative shadow-lg dark:shadow-none rounded-xl overflow-hidden pointer-events-auto flex">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
             <input 
               type="text" 
               placeholder="Search for a city or place..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-3 bg-white/95 backdrop-blur-sm border-r border-slate-200/50 text-sm font-bold focus:outline-none text-slate-800"
+              className="w-full pl-9 pr-4 py-3 bg-white dark:bg-slate-900/95 backdrop-blur-sm border-r border-slate-200 dark:border-slate-800/50 text-sm font-bold focus:outline-none text-slate-800 dark:text-slate-200"
             />
           </div>
           <button 
@@ -161,18 +161,18 @@ export default function MapPicker({ onLocationSelect }: MapPickerProps) {
         </form>
 
         {/* Address & Locate Me */}
-        <div className="bg-white/95 backdrop-blur-md shadow-xl border border-slate-200/50 rounded-xl p-3 flex items-center gap-3">
+        <div className="bg-white dark:bg-slate-900/95 backdrop-blur-md shadow-xl dark:shadow-none border border-slate-200 dark:border-slate-800/50 rounded-xl p-3 flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
             <MapPin className="h-4 w-4 text-emerald-600 animate-bounce" />
           </div>
           <div className="flex-1 overflow-hidden">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Dropped Pin Location</p>
-            <p className="text-sm font-bold text-slate-900 truncate">{address}</p>
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 dark:text-slate-500 uppercase tracking-wider">Dropped Pin Location</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-slate-50 truncate">{address}</p>
           </div>
           <button 
             onClick={handleLocateMe}
             type="button"
-            className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 flex items-center justify-center transition-colors pointer-events-auto shrink-0"
+            className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-600 hover:bg-blue-100 flex items-center justify-center transition-colors pointer-events-auto shrink-0"
             title="Locate Me"
           >
             <Navigation className="h-4 w-4" />

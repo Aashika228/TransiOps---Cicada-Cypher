@@ -56,14 +56,14 @@ export function Benefits() {
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Why Choose Us</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 leading-tight tracking-tight">
             Built for
             <br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4, #8b5cf6)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Fleet Excellence
             </span>
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium">
+          <p className="text-lg text-slate-500 dark:text-slate-400 dark:text-slate-500 max-w-2xl mx-auto font-medium">
             Everything a modern transport operation needs — unified in one intuitive platform.
           </p>
         </div>
@@ -93,8 +93,8 @@ export function Benefits() {
                   <Icon className="h-7 w-7" style={{ color: benefit.color }} />
                 </div>
 
-                <h3 className="font-display text-2xl font-extrabold text-slate-900 mb-3 leading-tight">{benefit.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-5">{benefit.description}</p>
+                <h3 className="font-display text-2xl font-extrabold text-slate-900 dark:text-slate-50 mb-3 leading-tight">{benefit.title}</h3>
+                <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-sm leading-relaxed mb-5">{benefit.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {benefit.features.map((feature) => (
@@ -121,7 +121,7 @@ export function Benefits() {
             <div key={stat.label} className="group rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 cursor-default"
               style={{ background: stat.bg, border: `1px solid ${stat.color}20` }}>
               <p className="font-display text-4xl font-extrabold mb-1.5" style={{ color: stat.color }}>{stat.value}</p>
-              <p className="text-xs text-slate-500 font-bold tracking-wide uppercase">{stat.label}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 font-bold tracking-wide uppercase">{stat.label}</p>
             </div>
           ))}
         </div>

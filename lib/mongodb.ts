@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
+
+// Force Google DNS to bypass local ISP DNS blocks that cause querySrv ECONNREFUSED
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const MONGODB_URI = process.env.MONGO_URI;
 
@@ -16,6 +20,9 @@ async function connectToDatabase() {
   if (cached.conn) {
     return cached.conn;
   }
+
+  // Force Google DNS right before connecting to bypass Next.js worker thread isolation
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
 
   if (!cached.promise) {
     const opts = {

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { ModeToggle } from './mode-toggle'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -29,8 +30,8 @@ export function Navbar() {
               <span className="text-white font-extrabold text-lg leading-none">V</span>
             </div>
             <div>
-              <span className="font-display font-extrabold text-xl text-slate-900 tracking-tight">Vahan Saarthi</span>
-              <span className="hidden sm:block text-[9px] text-slate-400 font-semibold uppercase tracking-widest -mt-0.5">Fleet Intelligence</span>
+              <span className="font-display font-extrabold text-xl text-slate-900 dark:text-slate-50 tracking-tight">Vahan Saarthi</span>
+              <span className="hidden sm:block text-[9px] text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest -mt-0.5">Fleet Intelligence</span>
             </div>
           </Link>
 
@@ -38,7 +39,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-1">
             {['Features', 'Solutions', 'Pricing', 'Resources'].map((item) => (
               <a key={item} href="#"
-                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200">
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:text-slate-50 hover:bg-slate-50 dark:bg-slate-800 transition-all duration-200">
                 {item}
               </a>
             ))}
@@ -47,16 +48,16 @@ export function Navbar() {
           {/* Actions */}
           <div className="flex items-center gap-3">
             <Link href="/auth"
-              className="hidden sm:block text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors px-3 py-2">
+              className="hidden sm:block text-sm font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:text-emerald-600 transition-colors px-3 py-2">
               Log in
             </Link>
             <Link href="/auth"
               className="group relative inline-flex items-center justify-center text-sm font-bold text-white px-5 py-2.5 rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.04]"
               style={{ background: 'linear-gradient(135deg, #10b981, #059669)', boxShadow: '0 4px 16px rgba(16,185,129,0.35)' }}>
-              Get Started Free
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'linear-gradient(135deg, #059669, #047857)' }} />
               <span className="relative z-10">Get Started Free</span>
             </Link>
+            <ModeToggle />
           </div>
         </div>
       </div>

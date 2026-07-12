@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
+export const dynamic = 'force-dynamic';
 import Vehicle from '@/lib/models/Vehicle';
 
 export async function GET() {
@@ -17,7 +18,6 @@ export async function POST(req: Request) {
         await connectToDatabase();
         const body = await req.json();
         
-        // Ensure uniqueness check or allow Mongoose to handle it
         const newVehicle = await Vehicle.create(body);
         return NextResponse.json(newVehicle, { status: 201 });
     } catch (err: any) {

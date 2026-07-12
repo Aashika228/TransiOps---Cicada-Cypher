@@ -30,14 +30,14 @@ export function FAQ() {
             <HelpCircle className="h-3.5 w-3.5 text-emerald-500" />
             <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest">FAQ</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 leading-tight tracking-tight">
             Got Questions?
             <br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               We've Got Answers.
             </span>
           </h2>
-          <p className="text-lg text-slate-500 font-medium">
+          <p className="text-lg text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">
             Everything you need to know about Vahan Saarthi.
           </p>
         </div>
@@ -73,7 +73,7 @@ export function FAQ() {
 
                 <div style={{ maxHeight: isOpen ? '300px' : '0px', opacity: isOpen ? 1 : 0, overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease' }}>
                   <div className="px-6 pb-5 pl-[3.75rem]">
-                    <p className="text-slate-500 leading-relaxed text-sm">{faq.answer}</p>
+                    <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed text-sm">{faq.answer}</p>
                   </div>
                 </div>
               </div>
@@ -84,8 +84,8 @@ export function FAQ() {
         {/* CTA */}
         <div className="mt-12 rounded-2xl p-6 text-center" style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.07), rgba(6,182,212,0.07))', border: '1px solid rgba(16,185,129,0.15)' }}>
           <MessageCircle className="h-8 w-8 mx-auto mb-3 text-emerald-500" />
-          <p className="font-bold text-slate-800 mb-1">Still have questions?</p>
-          <p className="text-sm text-slate-500 mb-4">Our team is available 24/7 to help you get started.</p>
+          <p className="font-bold text-slate-800 dark:text-slate-200 mb-1">Still have questions?</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-4">Our team is available 24/7 to help you get started.</p>
           <a href="mailto:hello@vahansaarthi.com"
             className="inline-flex items-center gap-2 text-sm font-bold text-white px-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-105"
             style={{ background: 'linear-gradient(135deg, #10b981, #059669)', boxShadow: '0 6px 20px rgba(16,185,129,0.3)' }}>

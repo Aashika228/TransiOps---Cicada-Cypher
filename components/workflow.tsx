@@ -30,14 +30,14 @@ export function Workflow() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-2" style={{ background: 'rgba(16,185,129,0.10)', border: '1px solid rgba(16,185,129,0.22)' }}>
             <span className="text-xs font-semibold text-emerald-600 uppercase tracking-widest">How It Works</span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-50 leading-tight">
             Streamlined Operations
             <br />
             <span style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Workflow
             </span>
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 dark:text-slate-400 dark:text-slate-500 max-w-2xl mx-auto">
             A complete workflow designed for efficiency — from vehicle registration to analytics.
           </p>
         </div>
@@ -73,7 +73,7 @@ export function Workflow() {
                       {step.number}
                     </div>
                   </div>
-                  <p className="text-xs font-semibold text-slate-600 text-center leading-tight group-hover:text-slate-900 transition-colors duration-200">
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500 text-center leading-tight group-hover:text-slate-900 dark:text-slate-50 transition-colors duration-200">
                     {step.label}
                   </p>
                 </div>
@@ -84,8 +84,8 @@ export function Workflow() {
 
         {/* Bottom strip */}
         <div className="mt-16 rounded-2xl p-6 text-center" style={{ background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.05)' }}>
-          <p className="text-slate-600 text-sm">
-            <span className="text-slate-900 font-semibold">All 8 modules work together</span> — seamlessly integrated in one platform for complete operational control.
+          <p className="text-slate-600 dark:text-slate-400 dark:text-slate-500 text-sm">
+            <span className="text-slate-900 dark:text-slate-50 font-semibold">All 8 modules work together</span> — seamlessly integrated in one platform for complete operational control.
           </p>
         </div>
       </div>
