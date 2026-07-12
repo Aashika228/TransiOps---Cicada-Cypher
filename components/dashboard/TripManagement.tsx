@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { Plus, Search, MapPin, MoreHorizontal, ArrowRight, Map, Crosshair, X } from 'lucide-react'
 
@@ -28,8 +28,6 @@ export function TripManagement() {
     plannedDistance: ''
   })
 
-  import { useEffect } from 'react'
-  
   useEffect(() => {
     fetchData()
   }, [])

@@ -8,26 +8,60 @@ export function DriverManagement() {
 
   const [drivers, setDrivers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    licenseNumber: '',
+    licenseCategory: 'Heavy Commercial (HGMV)',
+    licenseExpiry: '',
+    phone: ''
+  })
+
+  const fetchDrivers = async () => {
+    try {
+      const res = await fetch('/api/drivers')
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setDrivers(data)
+      } else {
+        console.error('API Error:', data)
+        setDrivers([])
+      }
+    } catch (err) {
+      console.error(err)
+      setDrivers([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchDrivers = async () => {
-      try {
-        const res = await fetch('/api/drivers')
-        const data = await res.json()
-        if (Array.isArray(data)) {
-          setDrivers(data)
-        } else {
-          console.error('API Error:', data)
-          setDrivers([])
-        }
-      } catch (err) {
-        console.error(err)
-        setDrivers([])
-      } finally {
-        setLoading(false)
-      }
-    }
     fetchDrivers()
+  }, [])
+
+  const handleAdd = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const res = await fetch('/api/drivers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      if (res.ok) {
+        setShowAddModal(false)
+        fetchDrivers()
+        setFormData({ name: '', licenseNumber: '', licenseCategory: 'Heavy Commercial (HGMV)', licenseExpiry: '', phone: '' })
+      } else {
+        const err = await res.json()
+        alert(err.error)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  useEffect(() => {
+    // legacy fetch removed
   }, [])
 
   const getScoreColor = (score: number) => {
@@ -48,7 +82,7 @@ export function DriverManagement() {
           <h2 className="text-2xl font-display font-extrabold text-slate-900">Driver Management</h2>
           <p className="text-sm text-slate-500 font-medium">Manage driver profiles, licenses, and safety scores.</p>
         </div>
-        <button className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold shadow-md hover:bg-slate-800 transition-colors">
+        <button onClick={() => setShowAddModal(true)} className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold shadow-md hover:bg-slate-800 transition-colors">
           <Plus className="h-4 w-4" />
           Add Driver
         </button>
@@ -203,6 +237,43 @@ export function DriverManagement() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Driver Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+            <h3 className="font-bold text-xl mb-4 text-slate-900">Add New Driver</h3>
+            <form onSubmit={handleAdd} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-slate-700">Driver Name</label>
+                <input required value={formData.name} onChange={e=>setFormData({...formData, name: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm" placeholder="e.g. Alex"/>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-700">License Number</label>
+                <input required value={formData.licenseNumber} onChange={e=>setFormData({...formData, licenseNumber: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm" placeholder="e.g. DL-12345"/>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-700">Category</label>
+                <select value={formData.licenseCategory} onChange={e=>setFormData({...formData, licenseCategory: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm">
+                  <option>Heavy Commercial (HGMV)</option><option>Medium Commercial (MGMV)</option><option>Light Commercial (LGMV)</option>
+                </select>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-700">License Expiry Date</label>
+                <input required type="date" value={formData.licenseExpiry} onChange={e=>setFormData({...formData, licenseExpiry: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm"/>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-700">Contact Number</label>
+                <input required value={formData.phone} onChange={e=>setFormData({...formData, phone: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border rounded-lg text-sm" placeholder="e.g. +91 9876543210"/>
+              </div>
+              <div className="flex justify-end gap-3 pt-4">
+                <button type="button" onClick={() => setShowAddModal(false)} className="px-4 py-2 font-bold text-slate-500 hover:text-slate-800">Cancel</button>
+                <button type="submit" className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold hover:bg-emerald-700">Add Driver</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
