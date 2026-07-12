@@ -1,19 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Search, User, MoreHorizontal, ShieldAlert, ShieldCheck, MapPin, X } from 'lucide-react'
 
 export function DriverManagement() {
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null)
 
-  const drivers = [
-    { name: 'Amit Sharma', lic: 'DL-1420110012345', cat: 'Heavy Commercial (HGMV)', exp: '15 Jul 2024', phone: '+91 98765 43210', score: 94, location: 'Surat, Gujarat', status: 'On Trip', statusColor: 'bg-blue-100 text-blue-700' },
-    { name: 'Rajesh Kumar', lic: 'UP-3220150098765', cat: 'Heavy Commercial (HGMV)', exp: '20 Jul 2024', phone: '+91 91234 56780', score: 45, location: 'New Delhi', status: 'Available', statusColor: 'bg-emerald-100 text-emerald-700' },
-    { name: 'Suresh Singh', lic: 'HR-2620180054321', cat: 'Medium Commercial (MGMV)', exp: '05 Aug 2024', phone: '+91 99887 76655', score: 82, location: 'Mumbai, Maharashtra', status: 'Available', statusColor: 'bg-emerald-100 text-emerald-700' },
-    { name: 'Vikram Patel', lic: 'GJ-0120190011223', cat: 'Light Commercial (LGMV)', exp: '12 Aug 2024', phone: '+91 98712 34560', score: 68, location: 'Ahmedabad, Gujarat', status: 'Off Duty', statusColor: 'bg-amber-100 text-amber-700' },
-    { name: 'Manoj Tiwari', lic: 'MP-0920200022334', cat: 'Heavy Commercial (HGMV)', exp: '25 Dec 2025', phone: '+91 91122 33445', score: 32, location: '-', status: 'Suspended', statusColor: 'bg-red-100 text-red-700' },
-    { name: 'Ramesh Singh', lic: 'RJ-1420210044556', cat: 'Heavy Commercial (HGMV)', exp: '10 Jan 2026', phone: '+91 95566 77889', score: 88, location: 'Jaipur, Rajasthan', status: 'On Trip', statusColor: 'bg-blue-100 text-blue-700' },
-  ]
+  const [drivers, setDrivers] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      try {
+        const res = await fetch('/api/drivers')
+        const data = await res.json()
+        if (Array.isArray(data)) {
+          setDrivers(data)
+        } else {
+          console.error('API Error:', data)
+          setDrivers([])
+        }
+      } catch (err) {
+        console.error(err)
+        setDrivers([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchDrivers()
+  }, [])
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-emerald-600 bg-emerald-50'
@@ -73,8 +88,18 @@ export function DriverManagement() {
               </tr>
             </thead>
             <tbody className="text-sm">
-              {drivers.map((d, i) => (
-                <tr key={i} className="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
+              {loading ? (
+                <tr><td colSpan={8} className="p-4 text-center text-slate-500">Loading drivers...</td></tr>
+              ) : drivers.length === 0 ? (
+                <tr><td colSpan={8} className="p-4 text-center text-slate-500">No drivers found.</td></tr>
+              ) : drivers.map((d, i) => {
+                let statusColor = 'bg-emerald-100 text-emerald-700';
+                if (d.status === 'On Trip') statusColor = 'bg-blue-100 text-blue-700';
+                if (d.status === 'Off Duty') statusColor = 'bg-amber-100 text-amber-700';
+                if (d.status === 'Suspended') statusColor = 'bg-red-100 text-red-700';
+
+                return (
+                <tr key={d._id || i} className="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
                   <td className="px-6 py-4 font-bold text-slate-800 flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
                       <User className="h-4 w-4 text-slate-400" />
@@ -84,18 +109,18 @@ export function DriverManagement() {
                       <p className="text-[10px] text-slate-500 font-semibold">{d.phone}</p>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-slate-600 font-mono text-xs">{d.lic}</td>
-                  <td className="px-6 py-4 text-slate-600 font-medium">{d.cat}</td>
-                  <td className="px-6 py-4 text-slate-600 font-medium">{d.exp}</td>
+                  <td className="px-6 py-4 text-slate-600 font-mono text-xs">{d.licenseNumber}</td>
+                  <td className="px-6 py-4 text-slate-600 font-medium">{d.licenseCategory}</td>
+                  <td className="px-6 py-4 text-slate-600 font-medium">{new Date(d.licenseExpiry).toLocaleDateString()}</td>
                   <td className="px-6 py-4">
-                    {d.location !== '-' ? (
+                    {d.currentLocation && d.currentLocation !== '-' ? (
                       <button 
-                        onClick={() => setSelectedLocation(d.location)}
+                        onClick={() => setSelectedLocation(d.currentLocation)}
                         className="flex items-center gap-1.5 hover:bg-emerald-50 px-2 py-1 rounded-md transition-colors group/loc"
                       >
                         <MapPin className="h-3.5 w-3.5 text-emerald-500" />
                         <span className="text-xs font-bold text-slate-700 group-hover/loc:text-emerald-700">
-                          {d.location} <span className="text-[10px] text-emerald-600/70 ml-1">(JioTrack)</span>
+                          {d.currentLocation} <span className="text-[10px] text-emerald-600/70 ml-1">(JioTrack)</span>
                         </span>
                       </button>
                     ) : (
@@ -103,19 +128,19 @@ export function DriverManagement() {
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-bold ${getScoreColor(d.score)}`}>
-                      {getScoreIcon(d.score)}
-                      {d.score}/100
+                    <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-bold ${getScoreColor(d.safetyScore)}`}>
+                      {getScoreIcon(d.safetyScore)}
+                      {d.safetyScore}/100
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-md ${d.statusColor}`}>{d.status}</span>
+                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-md ${statusColor}`}>{d.status}</span>
                   </td>
                   <td className="px-6 py-4 text-center">
                     <button className="text-slate-400 hover:text-slate-900 transition-colors p-1"><MoreHorizontal className="h-4 w-4" /></button>
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
         </div>

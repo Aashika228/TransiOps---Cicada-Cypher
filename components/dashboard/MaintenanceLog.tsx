@@ -1,14 +1,81 @@
 'use client'
 
 import { Plus, Search, Wrench, MoreHorizontal, Calendar, Info } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 export function MaintenanceLog() {
-  const records = [
-    { v: 'MH-04-AB-1234', date: '11 Jul 2024', desc: 'Engine oil replacement & filter change', cost: '₹12,500', status: 'Completed', statusColor: 'bg-emerald-100 text-emerald-700' },
-    { v: 'DL-01-XY-9876', date: '08 Jul 2024', desc: 'Brake pad replacement (All wheels)', cost: '₹28,000', status: 'Completed', statusColor: 'bg-emerald-100 text-emerald-700' },
-    { v: 'KA-05-PQ-3344', date: 'Today, 09:00 AM', desc: 'Transmission fluid leak repair', cost: 'Pending', status: 'In Shop', statusColor: 'bg-red-100 text-red-700' },
-    { v: 'TN-10-LM-5566', date: 'Scheduled: 15 Jul', desc: 'Routine 50,000km full inspection', cost: 'Estimate: ₹8,000', status: 'Scheduled', statusColor: 'bg-amber-100 text-amber-700' },
-  ]
+  const [records, setRecords] = useState<any[]>([])
+  const [vehicles, setVehicles] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const [formData, setFormData] = useState({
+    vehicleId: '',
+    date: '',
+    issueDescription: '',
+    cost: ''
+  })
+
+  useEffect(() => {
+    fetchData()
+    fetchVehicles()
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch('/api/maintenance')
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setRecords(data)
+      } else {
+        console.error('API Error:', data)
+        setRecords([])
+      }
+    } catch (error) {
+      console.error(error)
+      setRecords([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchVehicles = async () => {
+    try {
+      const res = await fetch('/api/vehicles')
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setVehicles(data)
+      } else {
+        console.error('API Error:', data)
+        setVehicles([])
+      }
+    } catch (error) {
+      console.error(error)
+      setVehicles([])
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!formData.vehicleId || !formData.issueDescription || !formData.cost) return
+    
+    try {
+      await fetch('/api/maintenance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          vehicleId: formData.vehicleId,
+          date: formData.date || new Date().toISOString(),
+          issueDescription: formData.issueDescription,
+          cost: Number(formData.cost)
+        })
+      })
+      // Refresh data and reset form
+      fetchData()
+      setFormData({ vehicleId: '', date: '', issueDescription: '', cost: '' })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -32,13 +99,19 @@ export function MaintenanceLog() {
             </p>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700">Vehicle</label>
-              <select className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors">
-                <option>Select Vehicle</option>
-                <option>MH-04-AB-1234 (Available)</option>
-                <option>KA-05-PQ-3344 (Available)</option>
+              <select 
+                value={formData.vehicleId}
+                onChange={e => setFormData({...formData, vehicleId: e.target.value})}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors"
+                required
+              >
+                <option value="">Select Vehicle</option>
+                {vehicles.map(v => (
+                  <option key={v._id} value={v._id}>{v.registrationNumber} ({v.status})</option>
+                ))}
               </select>
             </div>
             
@@ -46,21 +119,40 @@ export function MaintenanceLog() {
               <label className="text-xs font-bold text-slate-700">Service Date</label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                <input type="date" className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors" />
+                <input 
+                  type="date" 
+                  value={formData.date}
+                  onChange={e => setFormData({...formData, date: e.target.value})}
+                  className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors" 
+                />
               </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700">Description of Work</label>
-              <textarea placeholder="Describe the maintenance..." rows={3} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors resize-none" />
+              <textarea 
+                placeholder="Describe the maintenance..." 
+                rows={3} 
+                value={formData.issueDescription}
+                onChange={e => setFormData({...formData, issueDescription: e.target.value})}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors resize-none" 
+                required
+              />
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700">Cost (₹)</label>
-              <input type="number" placeholder="0.00" className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors" />
+              <input 
+                type="number" 
+                placeholder="0.00" 
+                value={formData.cost}
+                onChange={e => setFormData({...formData, cost: e.target.value})}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium focus:border-emerald-500 outline-none transition-colors" 
+                required
+              />
             </div>
 
-            <button type="button" className="w-full mt-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-bold shadow-md hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+            <button type="submit" className="w-full mt-4 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-bold shadow-md hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
               <Plus className="h-4 w-4" /> Add Record & Send to Shop
             </button>
           </form>
@@ -88,17 +180,22 @@ export function MaintenanceLog() {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {records.map((r, i) => (
-                  <tr key={i} className="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
+                {loading ? (
+                  <tr><td colSpan={5} className="p-4 text-center text-slate-500">Loading records...</td></tr>
+                ) : records.length === 0 ? (
+                  <tr><td colSpan={5} className="p-4 text-center text-slate-500">No maintenance records found.</td></tr>
+                ) : records.map((r, i) => (
+                  <tr key={r._id || i} className="border-b border-slate-50 hover:bg-slate-50 transition-colors group">
                     <td className="px-4 py-4 font-bold text-slate-800 font-mono text-xs flex items-center gap-2">
                       <Wrench className="h-3.5 w-3.5 text-slate-400" />
-                      {r.v}
+                      {/* Usually you'd populate vehicleId to get the registrationNumber */}
+                      {r.vehicleId?.substring(0, 8) || 'Unknown'}
                     </td>
-                    <td className="px-4 py-4 text-slate-500 font-medium text-xs">{r.date}</td>
-                    <td className="px-4 py-4 text-slate-700 font-medium">{r.desc}</td>
-                    <td className="px-4 py-4 text-slate-900 font-bold">{r.cost}</td>
+                    <td className="px-4 py-4 text-slate-500 font-medium text-xs">{new Date(r.date).toLocaleDateString()}</td>
+                    <td className="px-4 py-4 text-slate-700 font-medium">{r.issueDescription}</td>
+                    <td className="px-4 py-4 text-slate-900 font-bold">₹{r.cost}</td>
                     <td className="px-4 py-4 text-right">
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${r.statusColor}`}>{r.status}</span>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${r.status === 'Closed' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>{r.status}</span>
                     </td>
                   </tr>
                 ))}
