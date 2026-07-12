@@ -11,14 +11,14 @@ export default function AuthPage() {
   const [selectedRole, setSelectedRole] = useState<Role>('Fleet Manager')
   
   // Controlled inputs for pre-filling
-  const [email, setEmail] = useState('manager@vahaansaarthi.com')
+  const [email, setEmail] = useState('manager@vahansaarthi.com')
   const [password, setPassword] = useState('demo1234')
 
   const roles: { id: Role; icon: any; color: string; placeholder: string }[] = [
-    { id: 'Driver', icon: Truck, color: '#06b6d4', placeholder: 'driver@vahaansaarthi.com' },
-    { id: 'Fleet Manager', icon: Briefcase, color: '#10b981', placeholder: 'manager@vahaansaarthi.com' },
-    { id: 'Safety Officer', icon: ShieldCheck, color: '#8b5cf6', placeholder: 'safety@vahaansaarthi.com' },
-    { id: 'Finance', icon: Landmark, color: '#f59e0b', placeholder: 'finance@vahaansaarthi.com' },
+    { id: 'Driver', icon: Truck, color: '#06b6d4', placeholder: 'driver@vahansaarthi.com' },
+    { id: 'Fleet Manager', icon: Briefcase, color: '#10b981', placeholder: 'manager@vahansaarthi.com' },
+    { id: 'Safety Officer', icon: ShieldCheck, color: '#8b5cf6', placeholder: 'safety@vahansaarthi.com' },
+    { id: 'Finance', icon: Landmark, color: '#f59e0b', placeholder: 'finance@vahansaarthi.com' },
   ]
 
   const currentRole = roles.find(r => r.id === selectedRole)!
@@ -58,7 +58,7 @@ export default function AuthPage() {
               <span className="text-white font-bold text-2xl leading-none">V</span>
             </div>
             <span className="font-display font-bold text-2xl text-white tracking-tight">
-              Vahaan Saarthi
+              Vahan Saarthi
             </span>
           </Link>
 
@@ -103,7 +103,7 @@ export default function AuthPage() {
               <span className="text-white font-bold text-xl leading-none">V</span>
             </div>
             <span className="font-display font-bold text-2xl text-slate-900 tracking-tight">
-              Vahaan Saarthi
+              Vahan Saarthi
             </span>
           </Link>
 
@@ -146,7 +146,7 @@ export default function AuthPage() {
             </div>
 
             {/* Form */}
-            <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); window.location.href = '/dashboard' }}>
+            <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); window.location.href = `/dashboard?role=${selectedRole.toLowerCase().replace(' ', '-')}` }}>
               {!isLogin && (
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-slate-700">Full Name</label>

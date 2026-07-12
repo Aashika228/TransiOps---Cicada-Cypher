@@ -43,7 +43,7 @@ export function CTA() {
           </h2>
 
           <p className="text-lg text-white/70 max-w-2xl mx-auto mb-10 font-medium">
-            Join hundreds of companies managing their fleets smarter with Vahaan Saarthi. Start your free 30-day trial — no credit card required.
+            Join hundreds of companies managing their fleets smarter with Vahan Saarthi. Start your free 30-day trial — no credit card required.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -94,7 +94,7 @@ export function Footer() {
                 <span className="text-white font-extrabold text-lg leading-none">V</span>
               </div>
               <div>
-                <p className="font-display font-extrabold text-lg text-white tracking-tight">Vahaan Saarthi</p>
+                <p className="font-display font-extrabold text-lg text-white tracking-tight">Vahan Saarthi</p>
                 <p className="text-[9px] text-slate-500 font-semibold uppercase tracking-widest">Fleet Intelligence</p>
               </div>
             </div>
@@ -139,9 +139,9 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-white text-sm tracking-wide">Contact</h4>
             <div className="space-y-3">
-              <a href="mailto:hello@vahaansaarthi.com" className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">
+              <a href="mailto:hello@vahansaarthi.com" className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">
                 <Mail className="h-3.5 w-3.5 flex-shrink-0" />
-                hello@vahaansaarthi.com
+                hello@vahansaarthi.com
               </a>
               <a href="tel:+918000000000" className="flex items-center gap-2 text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200">
                 <Phone className="h-3.5 w-3.5 flex-shrink-0" />
@@ -157,7 +157,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <p className="text-xs text-slate-600">© 2024 Vahaan Saarthi Technologies Pvt. Ltd. All rights reserved.</p>
+          <p className="text-xs text-slate-600">© 2024 Vahan Saarthi Technologies Pvt. Ltd. All rights reserved.</p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
               <a key={item} href="#" className="text-xs text-slate-600 hover:text-emerald-400 transition-colors duration-200">{item}</a>

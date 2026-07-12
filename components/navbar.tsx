@@ -29,7 +29,7 @@ export function Navbar() {
               <span className="text-white font-extrabold text-lg leading-none">V</span>
             </div>
             <div>
-              <span className="font-display font-extrabold text-xl text-slate-900 tracking-tight">Vahaan Saarthi</span>
+              <span className="font-display font-extrabold text-xl text-slate-900 tracking-tight">Vahan Saarthi</span>
               <span className="hidden sm:block text-[9px] text-slate-400 font-semibold uppercase tracking-widest -mt-0.5">Fleet Intelligence</span>
             </div>
           </Link>

@@ -164,7 +164,7 @@ export function Hero() {
                 </div>
                 <div className="flex-1 mx-3">
                   <div className="h-5 rounded-lg flex items-center px-3" style={{ background: 'rgba(0,0,0,0.05)' }}>
-                    <span className="text-[10px] text-slate-400 font-medium">app.vahaansaarthi.com/dashboard</span>
+                    <span className="text-[10px] text-slate-400 font-medium">app.vahansaarthi.com/dashboard</span>
                   </div>
                 </div>
                 <div className="w-5 h-5 rounded-md" style={{ background: 'rgba(16,185,129,0.15)' }} />

@@ -5,7 +5,7 @@ import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react'
 
 const faqs = [
   { question: 'How does fleet tracking work?', answer: 'Our platform uses advanced GPS technology integrated with your vehicles to provide real-time tracking. Each vehicle transmits location data every 10–30 seconds, allowing you to monitor the entire fleet on an interactive map with full historical trip data.' },
-  { question: 'Can multiple branches be managed from one account?', answer: 'Absolutely! Vahaan Saarthi supports multi-location management with centralized control. Manage multiple branches from a single dashboard with branch-specific analytics, budgets, and reporting. Role-based access lets regional managers control their zones while maintaining company-wide visibility.' },
+  { question: 'Can multiple branches be managed from one account?', answer: 'Absolutely! Vahan Saarthi supports multi-location management with centralized control. Manage multiple branches from a single dashboard with branch-specific analytics, budgets, and reporting. Role-based access lets regional managers control their zones while maintaining company-wide visibility.' },
   { question: 'Does the platform support maintenance reminders?', answer: 'Yes — our intelligent maintenance module tracks service schedules, generates automatic reminders before due dates, and maintains a complete service history. Set custom intervals based on mileage or time and receive alerts before vehicles go overdue.' },
   { question: 'Can I export reports in different formats?', answer: 'Yes, you can export comprehensive reports in CSV and PDF formats. Generate custom reports for expenses, fuel consumption, driver performance, and maintenance records. Schedule automated delivery to your email daily, weekly, or monthly.' },
   { question: 'What security measures are in place?', answer: 'We implement enterprise-grade security: end-to-end encryption, role-based access control, two-factor authentication, audit logs for every operation, and compliance with industry standards. Data is stored with automated backups and a full disaster recovery protocol.' },
@@ -38,7 +38,7 @@ export function FAQ() {
             </span>
           </h2>
           <p className="text-lg text-slate-500 font-medium">
-            Everything you need to know about Vahaan Saarthi.
+            Everything you need to know about Vahan Saarthi.
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export function FAQ() {
           <MessageCircle className="h-8 w-8 mx-auto mb-3 text-emerald-500" />
           <p className="font-bold text-slate-800 mb-1">Still have questions?</p>
           <p className="text-sm text-slate-500 mb-4">Our team is available 24/7 to help you get started.</p>
-          <a href="mailto:hello@vahaansaarthi.com"
+          <a href="mailto:hello@vahansaarthi.com"
             className="inline-flex items-center gap-2 text-sm font-bold text-white px-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-105"
             style={{ background: 'linear-gradient(135deg, #10b981, #059669)', boxShadow: '0 6px 20px rgba(16,185,129,0.3)' }}>
             Contact our team

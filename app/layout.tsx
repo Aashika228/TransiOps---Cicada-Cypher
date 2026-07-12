@@ -10,7 +10,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Vahaan Saarthi - Smart Transport Operations Platform',
+  title: 'Vahan Saarthi - Smart Transport Operations Platform',
   description: 'Manage your entire fleet efficiently with centralized vehicle management, driver operations, dispatching, maintenance, fuel tracking, and real-time analytics.',
   generator: 'v0.app',
   icons: {

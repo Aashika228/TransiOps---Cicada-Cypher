@@ -88,7 +88,7 @@ export function Features() {
             </span>
           </h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Explore each module to see how Vahaan Saarthi transforms fleet management.
+            Explore each module to see how Vahan Saarthi transforms fleet management.
           </p>
         </div>
 
